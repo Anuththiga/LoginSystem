@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,6 +61,27 @@ public class LoginPage implements ActionListener{
 		if(e.getSource() == resetButton) {
 			userIdField.setText("");
 			userPasswordField.setText("");
+		}
+		
+		if(e.getSource() == loginButton) {
+			String userID = userIdField.getText();
+			String password = String.valueOf(userPasswordField.getPassword());
+			
+			if(loginInfo.containsKey(userID)) {
+				if(loginInfo.get(userID).equals(password)) {
+					messageLabel.setForeground(Color.green);
+					messageLabel.setText("Login Successful.");
+					frame.dispose();
+					WelcomePage welcomePage = new WelcomePage(userID);
+				} else {
+					messageLabel.setForeground(Color.red);
+					messageLabel.setText("Wrong Password.");
+				}
+			} 
+			else {
+				messageLabel.setForeground(Color.red);
+				messageLabel.setText("Username not found.");
+			}
 		}
 		
 	}
